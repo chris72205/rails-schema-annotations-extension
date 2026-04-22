@@ -15,7 +15,7 @@ rescue LoadError
 
   unless lib_dir
     $stderr.puts '[rails-schema-annotations] annotaterb not found; installing…'
-    unless system(RbConfig.ruby, '-S', 'gem', 'install', 'annotaterb', '--no-document')
+    unless system(RbConfig.ruby, '-S', 'gem', 'install', 'annotaterb', '--no-document', out: $stderr)
       $stderr.puts '[rails-schema-annotations] gem install annotaterb failed'
       return false
     end
