@@ -1,0 +1,9 @@
+node_modules/
+out/
+coverage/
+*.vsix
+package-lock.json
+test/**/*.js
+test/**/*.js.map
+vitest.config.js
+vitest.config.js.map

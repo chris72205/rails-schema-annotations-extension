@@ -1,0 +1,155 @@
+{
+  "name": "rails-schema-annotations",
+  "displayName": "Rails Schema Annotations",
+  "description": "Virtual annotaterb-style schema annotations for Rails model files",
+  "version": "0.0.1",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "workspaceContains:db/schema.rb",
+    "workspaceContains:db/structure.sql"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "panel": [
+        {
+          "id": "railsSchemaInfoContainer",
+          "title": "Schema Info",
+          "icon": "media/schema.svg"
+        }
+      ]
+    },
+    "views": {
+      "railsSchemaInfoContainer": [
+        {
+          "type": "webview",
+          "id": "railsSchemaAnnotations.schemaInfo",
+          "name": "Active File"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "railsSchemaAnnotations.toggle",
+        "title": "Toggle",
+        "category": "Schema Annotations"
+      },
+      {
+        "command": "railsSchemaAnnotations.refresh",
+        "title": "Refresh",
+        "category": "Schema Annotations"
+      },
+      {
+        "command": "railsSchemaAnnotations.showPanel",
+        "title": "Show Schema Info Panel",
+        "category": "Schema Annotations"
+      },
+      {
+        "command": "railsSchemaAnnotations.memoryReport",
+        "title": "Memory Report",
+        "category": "Schema Annotations"
+      }
+    ],
+    "configuration": {
+      "title": "Rails Schema Annotations",
+      "properties": {
+        "railsSchemaAnnotations.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/disable schema annotations"
+        },
+        "railsSchemaAnnotations.showIndexes": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show index information in annotations"
+        },
+        "railsSchemaAnnotations.showForeignKeys": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show foreign key information in annotations"
+        },
+        "railsSchemaAnnotations.showCompleteForeignKeys": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show full foreign key constraint names instead of truncated fk_rails_… names"
+        },
+        "railsSchemaAnnotations.showCheckConstraints": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show CHECK constraints in annotations"
+        },
+        "railsSchemaAnnotations.showVirtualColumns": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show virtual/generated columns in annotations"
+        },
+        "railsSchemaAnnotations.ignoreColumns": {
+          "type": "string",
+          "default": "",
+          "description": "Regex pattern of column names to exclude from annotations (e.g. ^encrypted_)"
+        },
+        "railsSchemaAnnotations.classifiedSort": {
+          "type": "boolean",
+          "default": false,
+          "description": "Sort columns by type: id first, then regular columns, then timestamps, then associations"
+        },
+        "railsSchemaAnnotations.sort": {
+          "type": "boolean",
+          "default": false,
+          "description": "Sort columns alphabetically"
+        },
+        "railsSchemaAnnotations.simpleIndexes": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show index information inline with columns rather than in a separate Indexes section"
+        },
+        "railsSchemaAnnotations.formatMarkdown": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use Markdown format for annotations"
+        },
+        "railsSchemaAnnotations.formatRdoc": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use RDoc format for annotations"
+        },
+        "railsSchemaAnnotations.formatYard": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use YARD format for annotations"
+        },
+        "railsSchemaAnnotations.withComment": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include database column comments in annotations"
+        }
+      }
+    }
+  },
+  "packageManager": "pnpm@10.26.1",
+  "scripts": {
+    "vscode:prepublish": "pnpm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.70.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "@vitest/coverage-v8": "^4.1.5",
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^4.1.5"
+  }
+}
