@@ -40,6 +40,8 @@ unless load_annotaterb
   exit 0
 end
 
+begin
+
 ignore_columns_arg = ARGV.find { |a| a.start_with?('--ignore-columns=') }
 
 options = AnnotateRb::Options.from(
@@ -97,3 +99,9 @@ ActiveRecord::Base.descendants.each do |klass|
 end
 
 puts JSON.generate(result)
+
+rescue => e
+  $stderr.puts "[rails-schema-annotations] Unhandled error: #{e.message}"
+  puts JSON.generate({})
+  exit 0
+end
