@@ -64,7 +64,7 @@ ENV['RAILS_ENV'] ||= 'development'
 
 begin
   require File.expand_path('config/environment', Dir.pwd)
-rescue => e
+rescue LoadError, StandardError => e
   $stderr.puts "[rails-schema-annotations] Failed to load Rails environment: #{e.message}"
   puts JSON.generate({})
   exit 0
@@ -100,7 +100,7 @@ end
 
 puts JSON.generate(result)
 
-rescue => e
+rescue LoadError, StandardError => e
   $stderr.puts "[rails-schema-annotations] Unhandled error: #{e.message}"
   puts JSON.generate({})
   exit 0
