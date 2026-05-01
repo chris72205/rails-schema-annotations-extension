@@ -16,11 +16,11 @@ end
 require 'open3'
 
 class GenerateAnnotationsTest < Minitest::Test
-  def test_outputs_empty_json_when_no_gemfile
+  def test_outputs_empty_json_when_no_rails_app
     Dir.mktmpdir do |dir|
       result = run_script(cwd: dir)
       assert_equal({}, JSON.parse(result[:stdout]))
-      assert_match(/No Gemfile/, result[:stderr])
+      assert_match(/Failed to load Rails environment/, result[:stderr])
     end
   end
 

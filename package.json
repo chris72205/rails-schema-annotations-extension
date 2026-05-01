@@ -1,9 +1,14 @@
 {
   "name": "rails-schema-annotations",
+  "publisher": "chris72205",
   "displayName": "Rails Schema Annotations",
   "description": "Virtual annotaterb-style schema annotations for Rails model files",
   "version": "0.0.1",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chris72205/rails-schema-annotations-extension.git"
+  },
   "engines": {
     "vscode": "^1.70.0"
   },

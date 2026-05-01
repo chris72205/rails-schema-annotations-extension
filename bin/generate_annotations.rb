@@ -15,7 +15,7 @@ rescue LoadError
 
   unless lib_dir
     $stderr.puts '[rails-schema-annotations] annotaterb not found; installing…'
-    unless system(RbConfig.ruby, '-S', 'gem', 'install', 'annotaterb', '--no-document')
+    unless system(RbConfig.ruby, '-S', 'gem', 'install', 'annotaterb', '--no-document', out: $stderr)
       $stderr.puts '[rails-schema-annotations] gem install annotaterb failed'
       return false
     end
@@ -40,6 +40,8 @@ unless load_annotaterb
   exit 0
 end
 
+begin
+
 ignore_columns_arg = ARGV.find { |a| a.start_with?('--ignore-columns=') }
 
 options = AnnotateRb::Options.from(
@@ -62,7 +64,7 @@ ENV['RAILS_ENV'] ||= 'development'
 
 begin
   require File.expand_path('config/environment', Dir.pwd)
-rescue => e
+rescue LoadError, StandardError => e
   $stderr.puts "[rails-schema-annotations] Failed to load Rails environment: #{e.message}"
   puts JSON.generate({})
   exit 0
@@ -97,3 +99,9 @@ ActiveRecord::Base.descendants.each do |klass|
 end
 
 puts JSON.generate(result)
+
+rescue LoadError, StandardError => e
+  $stderr.puts "[rails-schema-annotations] Unhandled error: #{e.message}"
+  puts JSON.generate({})
+  exit 0
+end
