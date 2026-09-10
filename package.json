@@ -155,6 +155,6 @@
     "@vitest/coverage-v8": "^4.1.5",
     "eslint": "^8.0.0",
     "typescript": "^5.0.0",
-    "vitest": "^4.1.5"
+    "vitest": "^4.1.11"
   }
 }
